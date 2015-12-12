@@ -9,6 +9,7 @@ MenueScene::MenueScene()
 
 MenueScene::~MenueScene()
 {
+
 }
 
 void MenueScene::handleInput(sf::Event &event)

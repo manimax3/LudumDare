@@ -1,11 +1,13 @@
 #pragma once
 #include "Scene.h"
 #include "Player.h"
+#include "Map.h"
 class GameScene :
 	public Scene
 {
 private:
 	Player player;
+	Map map;
 public:
 	GameScene();
 	~GameScene();

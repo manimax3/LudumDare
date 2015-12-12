@@ -69,7 +69,6 @@ void Game::handleInput()
 		}
 	SceneManager::getInstance()->getCurrent()->handleInput(event);
 
-
 	}
 }
 

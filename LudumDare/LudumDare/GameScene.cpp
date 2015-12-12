@@ -2,7 +2,7 @@
 
 
 
-GameScene::GameScene() : player(Player(sf::Vector2u(30,30)))
+GameScene::GameScene() : player(Player(sf::Vector2u(40,56)))
 {
 
 }
@@ -15,7 +15,7 @@ GameScene::~GameScene()
 
 void GameScene::handleInput(sf::Event &event)
 {
-	//player.handleInput(event);
+	player.handleInput(event);
 }
 
 void GameScene::update(sf::Time &frameTime)
@@ -25,11 +25,13 @@ void GameScene::update(sf::Time &frameTime)
 
 void GameScene::render(sf::RenderWindow &window)
 {
+	window.draw(map);
 	player.render(window);
 }
 
 void GameScene::load()
 {
+	map.load("sprites.png", sf::Vector2u(32,32), level, 16, 8);
 	finished = false;
 }
 

@@ -13,7 +13,7 @@ Map::~Map()
 
 }
 
-void Map::load(const std::string& name, sf::Vector2u tileSize, const int tileID, unsigned int width, unsigned int height)
+void Map::load(const std::string& name, sf::Vector2u tileSize, const int *tileSet, unsigned int width, unsigned int height)
 {
 	//Loading the Textur
 	if (!m_SpriteSheet.loadFromFile(name))
@@ -23,15 +23,15 @@ void Map::load(const std::string& name, sf::Vector2u tileSize, const int tileID,
 	m_Vertices.setPrimitiveType(sf::Quads);
 	m_Vertices.resize(width * height * 4);
 
+	//Getting the TileID
+
 	//Adding the tiles based on the tileset to the array
 	for (unsigned int i = 0; i < width; ++i)
 		for (unsigned int j = 0; j < height; ++j)
 		{
+			int tileID = tileSet[i + (j * width)];
 			// get the current tile number
-
-			// find its position in the tileset texture
-			int tu = tileID % (m_SpriteSheet.getSize().x / tileSize.x);
-			int tv = tileID / (m_SpriteSheet.getSize().x / tileSize.x);
+			tileID = thor::random(0, 2);
 
 			// get a pointer to the current tile's quad
 			sf::Vertex* quad = &m_Vertices[(i + j * width) * 4];
@@ -43,10 +43,10 @@ void Map::load(const std::string& name, sf::Vector2u tileSize, const int tileID,
 			quad[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 
 			// define its 4 texture coordinates
-			quad[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);
-			quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
-			quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
-			quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
+			quad[0].texCoords = sf::Vector2f(tileID * tileSize.x, 0);
+			quad[1].texCoords = sf::Vector2f((tileID + 1) * tileSize.x, 0);
+			quad[2].texCoords = sf::Vector2f((tileID + 1) * tileSize.x,tileSize.y);
+			quad[3].texCoords = sf::Vector2f(tileID * tileSize.x, tileSize.y);
 		}
 }
 

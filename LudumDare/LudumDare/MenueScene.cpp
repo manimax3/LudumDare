@@ -1,6 +1,6 @@
 #include "MenueScene.h"
 
-
+#include "GameScene.h"
 
 MenueScene::MenueScene()
 {
@@ -29,10 +29,10 @@ void MenueScene::render(sf::RenderWindow &window)
 
 Scene* MenueScene::unload()
 {
-	return nullptr;
+	return new GameScene();
 }
 
 void MenueScene::load()
 {
-	finished = false;
+	finished = true;
 }

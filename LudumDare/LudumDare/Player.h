@@ -1,15 +1,16 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 
-#include <SFML\Graphics.hpp>
 #include <Thor\Animations.hpp>
+#include <SFML\Graphics.hpp>
 
 
 class Player
 {
 private:
-	sf::Image sprites;
+	sf::Texture sprites;
 	sf::Vector2f position;
 	sf::Vector2f velocity;
 	sf::Vector2u size;
@@ -23,7 +24,6 @@ public:
 	void update(sf::Time &time);
 	void render(sf::RenderWindow &window);
 	void handleInput(sf::Event &event);
-private:
-	void addFrames(thor::FrameAnimation& animation, int x, int yFirst, int yLast, float duration = 1.f);
+	
 };
 

@@ -22,6 +22,8 @@ void Game::start()
 	double usPerTick = 1000000 / 60;
 	double delta = 0;
 
+	bool canStart = false;
+
 	//Main Loop calling update() 60 times per sec, updaten() as often as possible
 	//and handleInput() on every event
 	while (window.isOpen() && mRunning)
@@ -35,9 +37,12 @@ void Game::start()
 			update(time);
 			delta--;
 			ticks++;
+			canStart = true;
 		}
-		render();
-		frames++;
+		if (canStart) {
+			render();
+			frames++;
+		}
 
 
 		if (lastTime >= 1) {

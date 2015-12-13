@@ -25,7 +25,7 @@ public:
 	sf::Vector2f position;
 	sf::Vector2u size;
 
-	float yLayer = 600.f;
+	float yLayer;
 	Player();
 	Player(thor::ResourceHolder<sf::Texture, std::string> &holder, sf::Vector2u size);
 	~Player();

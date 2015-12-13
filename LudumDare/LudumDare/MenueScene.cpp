@@ -14,7 +14,8 @@ MenueScene::~MenueScene()
 
 void MenueScene::handleInput(sf::Event &event)
 {
-
+	if (event.type == sf::Event::KeyPressed)
+		if (event.key.code == sf::Keyboard::Return) finished = true;
 }
 
 void MenueScene::update(sf::Time &frameTime)
@@ -34,5 +35,5 @@ Scene* MenueScene::unload()
 
 void MenueScene::load()
 {
-	finished = true;
+	finished = false;
 }

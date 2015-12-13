@@ -3,16 +3,16 @@
 #include <Thor\Resources.hpp>
 
 #include "Scene.h"
-#include "Player.h"
 #include "Map.h"
-#include "Ghost.h"
+#include "MobHandler.h"
+#include "LevelGenerator.h"
 class GameScene :
 	public Scene
 {
 private:
 	Player player;
 	Map map;
-	Ghost ghost;
+	MobHandler mHandler;
 
 	thor::ResourceHolder<sf::Texture, std::string> resHolder;
 public:

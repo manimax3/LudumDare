@@ -40,6 +40,7 @@ void Player::init(thor::ResourceHolder<sf::Texture, std::string> &holder, sf::Ve
 	this->size = size;
 	position = sf::Vector2f(0, 0);
 	velocity = sf::Vector2f(0, 0);
+	yLayer = HEIGHT - 34;
 
 	sprites = holder["player"];
 	sprite.setTexture(sprites);
@@ -90,9 +91,11 @@ void Player::update(sf::Time &time)
 	if (velocity.y > -1.f && velocity.y < 1.f) velocity.y = 0;
 
 	if (position.y + size.y - 1 < yLayer)
-		velocity.y += PLAYER_ACCELERATION * time.asSeconds() / 2;
-	else if (position.y + size.y + 1 > yLayer)
+		velocity.y += PLAYER_ACCELERATION * time.asSeconds();
+	else if (position.y + size.y + 1 >= yLayer)
 		velocity.y = 0;
+
+	std::cout << position.y << std::endl;
 
 	position += velocity * time.asSeconds();
 
@@ -106,9 +109,9 @@ void Player::update(sf::Time &time)
 		}
 	}
 
+	sprite.setPosition(position);
 	animator.update(time);
 	animator.animate(sprite);
-	sprite.setPosition(position);
 }
 
 void Player::render(sf::RenderWindow &window)

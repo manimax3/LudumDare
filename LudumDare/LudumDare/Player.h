@@ -5,6 +5,7 @@
 
 #include <Thor\Animations.hpp>
 #include <SFML\Graphics.hpp>
+#include <Thor/Resources.hpp>
 
 #include "Variables.h"
 
@@ -25,9 +26,10 @@ public:
 	sf::Vector2u size;
 
 	float yLayer = 600.f;
-
-	Player(sf::Vector2u size);
+	Player();
+	Player(thor::ResourceHolder<sf::Texture, std::string> &holder, sf::Vector2u size);
 	~Player();
+	void init(thor::ResourceHolder<sf::Texture, std::string> &holder, sf::Vector2u size);
 	void update(sf::Time &time);
 	void render(sf::RenderWindow &window);
 	void handleInput(sf::Event &event);

@@ -3,19 +3,25 @@
 void addFramesY(thor::FrameAnimation& animation, int x, int yFirst, int yLast, const sf::Vector2u &size, float duration = 1.f);
 void addFramesX(thor::FrameAnimation& animation, int y, int xFirst, int xLast, const sf::Vector2u &size, float duration = 1.f);
 
-Player::Player(sf::Vector2u size)
+Player::Player(thor::ResourceHolder<sf::Texture, std::string> &holder, sf::Vector2u size)
 {
 	this->size = size;
 	position = sf::Vector2f(0, 0);
 	velocity = sf::Vector2f(0, 0);
 
-	if (!sprites.loadFromFile("hulk.png"))
-		std::cerr << "Could not load player image file!";
+	sprites = holder["player"];
 
 	sprite.setTexture(sprites);
 
-	addFramesX(left, 1, 0, 3, size); //First 5 Pictures in Row 1 added to left
-	addFramesX(right, 2, 0, 3, size); //First 5 Pictures in Row 2 added to right
+	//Left Frames
+	addFramesX(left, 0, 3, 5, size);
+	addFramesX(left, 1, 3, 5, size);
+
+	//Right Frames
+	addFramesX(right, 0, 0, 2, size);
+	addFramesX(right, 1, 0, 2, size);
+
+	//Stand Frame
 	addFramesX(stand, 0, 0, 0, size);
 
 	animator.addAnimation("left", left, sf::seconds(1.f));
@@ -23,9 +29,35 @@ Player::Player(sf::Vector2u size)
 	animator.addAnimation("stand", stand, sf::seconds(1.f));
 }
 
+Player::Player(){}
 
 Player::~Player()
 {
+}
+
+void Player::init(thor::ResourceHolder<sf::Texture, std::string> &holder, sf::Vector2u size)
+{
+	this->size = size;
+	position = sf::Vector2f(0, 0);
+	velocity = sf::Vector2f(0, 0);
+
+	sprites = holder["player"];
+	sprite.setTexture(sprites);
+
+	//Left Frames
+	addFramesX(left, 0, 3, 5, size);
+	addFramesX(left, 1, 3, 5, size);
+
+	//Right Frames
+	addFramesX(right, 0, 0, 2, size); 
+	addFramesX(right, 1, 0, 2, size);
+
+	//Stand Frame
+	addFramesX(stand, 0, 0, 0, size);
+
+	animator.addAnimation("left", left, sf::seconds(1.f));
+	animator.addAnimation("right", right, sf::seconds(1.f));
+	animator.addAnimation("stand", stand, sf::seconds(1.f));
 }
 
 void Player::update(sf::Time &time)
